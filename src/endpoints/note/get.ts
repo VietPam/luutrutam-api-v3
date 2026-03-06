@@ -4,32 +4,29 @@ import { z } from "zod";
 export class ListNotes extends OpenAPIRoute {
   schema = {
     tags: ["Notes"],
-    summary: "Get all stored notes",
+    summary: "Get all notes (Legacy format)",
     responses: {
       "200": {
-        description: "Returns an array of notes",
+        description: "Array of notes",
         content: {
           "application/json": {
-            schema: z.array(
-              z.object({
-                id: z.string(),
-                text: z.string(),
-                created_at: z.string(),
-              })
-            ),
-          },
-        },
-      },
-    },
+            schema: z.array(z.object({
+              id: z.string(),
+              text: z.string(),
+              created_at: z.string()
+            }))
+          }
+        }
+      }
+    }
   };
 
   async handle(c: any) {
     const result = await c.env.DB.prepare(
-      "SELECT * FROM notes ORDER BY created_at DESC"
+      "SELECT id, text, created_at FROM notes ORDER BY created_at DESC"
     ).all();
-    return c.json({
-      success: true,
-      data: result.results || []
-    });
+    
+    // Trả về trực tiếp mảng results để giống hệt KV cũ
+    return c.json(result.results || []);
   }
 }
