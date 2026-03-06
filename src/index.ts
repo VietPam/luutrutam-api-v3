@@ -132,7 +132,7 @@ const openapi = fromHono(app, {
     },
   },
 });
-
+ 
 // Register Routes
 openapi.get("/notes", ListNotes);
 openapi.post("/notes", HandleNoteAction);
