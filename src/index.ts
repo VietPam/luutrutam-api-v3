@@ -43,6 +43,6 @@ const openapi = fromHono(app, {
 });
 
 // Đăng ký router đã tách
-openapi.route("/", notesRouter);
+openapi.route("/notes", notesRouter);
 
 export default app;
