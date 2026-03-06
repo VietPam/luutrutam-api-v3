@@ -1,0 +1,5 @@
+CREATE TABLE notes (
+    id TEXT PRIMARY KEY,
+    text TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
