@@ -1,0 +1,16 @@
+{
+	"compatibility_date": "2025-10-08",
+	"main": "src/index.ts",
+	"name": "luutrutam-api-v3",
+	"upload_source_maps": true,
+	"observability": {
+		"enabled": true
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "luutrutam-api-v3-db",
+			"database_id": "d91f0c57-df5a-45f0-ae02-acfa0b52520e"
+		}
+	]
+}
