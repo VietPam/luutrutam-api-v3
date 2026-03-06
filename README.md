@@ -27,7 +27,7 @@ Outside of this repo, you can start a new project with this template using [C3](
 ```bash
 npm create cloudflare@latest -- --template=cloudflare/templates/openapi-template
 ```
-
+ 
 A live public deployment of this template is available at [https://openapi-template.templates.workers.dev](https://openapi-template.templates.workers.dev)
 
 ## Setup Steps
