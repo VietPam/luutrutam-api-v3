@@ -4,16 +4,17 @@ import { z } from "zod";
 export class ListNotes extends OpenAPIRoute {
   schema = {
     tags: ["Notes"],
-    summary: "Get all notes (Legacy format)",
+    summary: "Get all notes",
     responses: {
       "200": {
-        description: "Array of notes",
+        description: "Array of notes including delete date",
         content: {
           "application/json": {
             schema: z.array(z.object({
               id: z.string(),
               text: z.string(),
-              created_at: z.string()
+              created_at: z.string(),
+              deleted_at: z.string().nullable()
             }))
           }
         }
@@ -22,11 +23,11 @@ export class ListNotes extends OpenAPIRoute {
   };
 
   async handle(c: any) {
+    // Lấy tất cả bao gồm cả những note đã xóa (hoặc thêm WHERE deleted_at IS NULL nếu muốn ẩn chúng)
     const result = await c.env.DB.prepare(
-      "SELECT id, text, created_at FROM notes ORDER BY created_at DESC"
+      "SELECT id, text, created_at, deleted_at FROM notes ORDER BY created_at DESC"
     ).all();
     
-    // Trả về trực tiếp mảng results để giống hệt KV cũ
     return c.json(result.results || []);
   }
 }

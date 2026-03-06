@@ -1,10 +1,11 @@
 import { Hono } from "hono";
 import { fromHono } from "chanfana";
 import { ListNotes } from "./get";
-import { HandleNoteAction } from "./post";
+import { CreateNote } from "./create";
+import { SoftDeleteNote } from "./softdelete";
 
 export const notesRouter = fromHono(new Hono());
 
-// Map đúng các phương thức mà Client cũ đang dùng
 notesRouter.get("/", ListNotes);
-notesRouter.post("/", HandleNoteAction);
+notesRouter.post("/create", CreateNote);
+notesRouter.post("/delete", SoftDeleteNote);
